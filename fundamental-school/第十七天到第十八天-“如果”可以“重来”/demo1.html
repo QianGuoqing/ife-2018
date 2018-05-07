@@ -1,0 +1,76 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>IFE ECMAScript</title>
+</head>
+
+<body>
+  <input id="first-number" type="number" value="0" placeholder="第一个数字">
+  <input id="second-number" type="number" value="0" placeholder="第二个数字">
+  <button id="add-btn">加</button>
+  <button id="minus-btn">减</button>
+  <button id="times-btn">乘</button>
+  <button id="divide-btn">除</button>
+  <br>
+  运算结果: <p id="result"></p>
+</body>
+<script>
+  ;(function() {
+    const addBtn = document.querySelector('#add-btn')
+    const minusBtn = document.querySelector('#minus-btn')
+    const timesBtn = document.querySelector('#times-btn')
+    const divideBtn = document.querySelector('#divide-btn')
+    const result = document.querySelector('#result')
+
+    addBtn.addEventListener('click', function() {
+      const { firstNumber, secondNumber } = getNumbers()
+      result.innerHTML = add(parseFloat(firstNumber), parseFloat(secondNumber))
+    })
+    minusBtn.addEventListener('click', function() {
+      const { firstNumber, secondNumber } = getNumbers()
+      result.innerHTML = minus(parseFloat(firstNumber), parseFloat(secondNumber))
+    })
+    timesBtn.addEventListener('click', function() {
+      const { firstNumber, secondNumber } = getNumbers()
+      result.innerHTML = times(parseFloat(firstNumber), parseFloat(secondNumber))
+    })
+    divideBtn.addEventListener('click', function () {  
+      const { firstNumber, secondNumber } = getNumbers()
+      if (secondNumber == 0) {
+        console.log('除数不能为0')
+        return
+      }
+      result.innerHTML = divide(parseFloat(firstNumber), parseFloat(secondNumber))
+    })
+    
+    function getNumbers() {
+      const firstNumber = document.querySelector('#first-number').value
+      const secondNumber = document.querySelector('#second-number').value
+      if (isNaN(firstNumber) || isNaN(secondNumber)) {
+        console.log('error input')
+        return
+      } else {
+        return {
+          firstNumber,
+          secondNumber
+        }
+      }
+    }
+
+    function add(number1, number2) {
+      return number1 + number2
+    }
+    function minus(number1, number2) {
+      return number1 - number2
+    }
+    function times(number1, number2) {
+      return number1 * number2
+    }
+    function divide(number1, number2) {
+      return number1 / number2
+    }
+  })()
+</script>
+
+</html>
