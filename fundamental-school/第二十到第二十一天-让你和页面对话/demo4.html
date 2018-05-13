@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+  <button id="fade-btn">淡出</button>
+</body>
+<script>
+  const fadeBlock = document.querySelector('#fade-obj')
+  const fadeBtn = document.querySelector('#fade-btn')
+  let fadeOutTimer = null
+  let fadeInTimer = null
+  let opacity = 1
+  fadeBtn.addEventListener('click', function() {
+    if (this.textContent === '淡出') {
+      this.disabled = true
+      if (fadeOutTimer) {
+        clearInterval(fadeOutTimer)
+      }
+      fadeOutTimer = setInterval(() => {
+        opacity -= 0.1
+        fadeBlock.style.opacity = opacity
+        if (opacity <= 0) {
+          clearInterval(fadeOutTimer)
+          this.disabled = false
+          this.textContent = '淡入'
+        }
+      }, 100)
+    } else if (this.textContent === '淡入') {
+      this.disabled = true
+      if (fadeInTimer) {
+        clearInterval(fadeInTimer)
+      }
+      fadeInTimer = setInterval(() => {
+        opacity += 0.1
+        fadeBlock.style.opacity = opacity
+        if (opacity >= 1) {
+          clearInterval(fadeOutTimer)
+          this.disabled = false
+          this.textContent = '淡出'
+        }
+      }, 100)
+    }
+  })
+</script>
+</html>
