@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  var tree = {
+    "id": 0,
+    "name": "root",
+    "left": {
+      "id": 1,
+      "name": "Simon",
+      "left": {
+        "id": 3,
+        "name": "Carl",
+        "left": {
+          "id": 7,
+          "name": "Lee",
+          "left": {
+            "id": 11,
+            "name": "Fate"
+          }
+        },
+        "right": {
+          "id": 8,
+          "name": "Annie",
+          "left": {
+            "id": 12,
+            "name": "Saber"
+          }
+        }
+      },
+      "right": {
+        "id": 4,
+        "name": "Tony",
+        "left": {
+          "id": 9,
+          "name": "Candy"
+        }
+      }
+    },
+    "right": {
+      "id": 2,
+      "name": "right",
+      "left": {
+        "id": 5,
+        "name": "Carl",
+      },
+      "right": {
+        "id": 6,
+        "name": "Carl",
+        "right": {
+          "id": 10,
+          "name": "Kai"
+        }
+      }
+    }
+  }
+
+  // 假设id和name均不会重复，根据输入name找到对应的id
+  function findIdByName(name) {
+    findIdByNameRecursive(tree, name)
+  }
+  function findIdByNameRecursive(tree, name) {
+    if (tree.name === name) {
+      console.log(`find id by name: ${tree.id}`)
+      return
+    } else {
+      if (tree.left) {
+        findIdByNameRecursive(tree.left, name)
+      }
+      if (tree.right) {
+        findIdByNameRecursive(tree.right, name)
+      }
+    }
+  }
+
+  // 假设id和name均不会重复，根据输入id找到对应的name
+  function findNameById(id) {
+    findNameByIdRecursive(tree, id)
+  }
+  function findNameByIdRecursive(tree, id) {
+    if (tree.id == id) {
+      console.log(`find name by id: ${tree.name}`)
+      return
+    } else {
+      if (tree.left) {
+        findNameByIdRecursive(tree.left, id)
+      }
+      if (tree.right) {
+        findNameByIdRecursive(tree.right, id)
+      }
+    }
+  }
+
+  // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+  function getListWithDLR() {
+    preOrder(tree)
+  }
+  function preOrder(tree) {
+    if (tree) {
+      console.log(`preorder: id: ${tree.id}, name: ${tree.name}`);
+      preOrder(tree.left)
+      preOrder(tree.right)
+    }
+  }
+
+  // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+  function getListWithLDR() {
+    inOroder(tree)
+  } 
+  function inOroder(tree) {
+    if (tree) {
+      inOroder(tree.left)
+      console.log(`inorder: id: ${tree.id}, name: ${tree.name}`)
+      inOroder(tree.right)
+    }
+  }
+
+  // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+  function getListWithLRD() {
+    postOrder(tree)
+  }
+  function postOrder(tree) {
+    if (tree) {
+      postOrder(tree.left)
+      postOrder(tree.right)
+      console.log(`postorder: id: ${tree.id}, name: ${tree.name}`)
+    }
+  }
+
+  getListWithDLR()
+  getListWithLDR()
+  getListWithLRD()
+  findIdByName('Kai')
+  findNameById(10)
+</script>
+
+</html>

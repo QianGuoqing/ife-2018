@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <input id="queue-input" type="text">
+  <p id="queue-cont">队列内容：<span class="content"></span></p>
+  <p>显示队头元素：<span class="head-content"></span></p>
+  <p>判断是否为空：<span class="is-empty"></span></p>
+  <button id="in-btn">入队</button>
+  <button id="out-btn">出队</button>
+  <button id="font-btn">打印队头元素内容</button>
+  <button id="empty-btn">判断队列是否为空</button>
+</body>
+<script>
+  var queue = []
+  const inBtn = document.querySelector('#in-btn')
+  const outBtn = document.querySelector('#out-btn')
+  const fontBtn = document.querySelector('#font-btn')
+  const emptyBtn = document.querySelector('#empty-btn')
+  const headContentSpan = document.querySelector('.head-content')
+  const isEmptySpan = document.querySelector('.is-empty')
+  const queueContentSpan = document.querySelector('.content')
+  
+  inBtn.addEventListener('click', function() {
+    let queueInput = document.querySelector('#queue-input')
+    queue.push(queueInput.value)
+    queueContentSpan.textContent = queue.join('->')
+    queueInput.value = ''
+  })
+
+  outBtn.addEventListener('click', function() {
+    let queueInput = document.querySelector('#queue-input')
+    queue.shift()
+    queueContentSpan.textContent = queue.join('->')
+    queueInput.value = ''
+  })
+
+  fontBtn.addEventListener('click', function() {
+    headContentSpan.textContent = queue[0]
+  })
+
+  emptyBtn.addEventListener('click', function() {
+    let str = ''
+    if (queue.length === 0) {
+      str = '队列为空'
+    } else {
+      str = '队列不为空'
+    }
+    isEmptySpan.textContent = str
+  })
+</script>
+</html>
