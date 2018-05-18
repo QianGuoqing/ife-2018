@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .show-time {
+      width: 50%;
+      margin: 10px auto;
+      background: deepskyblue;
+      border: 1px solid skyblue;
+      border-radius: 10px;
+      padding: 10px;
+      color: #fff;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="show-time">
+
+  </div>
+</body>
+<script>
+  const dateManipulation = (function() {
+    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+
+    function addZero(number) {
+      return number < 10 ? '0' + number : number
+    }
+
+    function getYear(date) {
+      return date.getFullYear()
+    }
+    function getMonth(date) {
+      return addZero(date.getMonth() + 1)
+    }
+    function getDate(date) {
+      return addZero(date.getDate())
+    }
+    function getDay(date) {
+      return days[date.getDay()]
+    }
+    function getHour(date) {
+      return addZero(date.getHours())
+    }
+    function getMinute(date) {
+      return addZero(date.getMinutes())
+    }
+    function getSecond(date) {
+      return addZero(date.getSeconds())
+    }
+
+    function formatDate(date) {
+      return `${getYear(date)}年${getMonth(date)}月${getDate(date)}日${getDay(date)} ${getHour(date)}:${getMinute(date)}:${getSecond(date)}`
+    }
+
+    return {
+      formatDate
+    }
+  })()
+
+  const showTime = document.querySelector('.show-time')
+  showTime.textContent = dateManipulation.formatDate(new Date())
+  setInterval(() => {
+    showTime.textContent = dateManipulation.formatDate(new Date())
+  }, 1000)
+  
+</script>
+</html>
